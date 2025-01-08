@@ -1,18 +1,23 @@
-// Note: Replace **<YOUR_APPLICATION_TOKEN>** with your actual Application token
+import dotenv from "dotenv";
+import fetch from "node-fetch";
+
+dotenv.config();
 
 export default class LangflowClient {
     constructor() {
         this.baseURL = "https://api.langflow.astra.datastax.com";
         this.applicationToken = process.env.LANGFLOW_TOKEN;
-    }
-    async post(
-        endpoint,
-        body,
-        headers = { "Content-Type": "application/json" }
-    ) {
-        headers["Authorization"] = `Bearer ${process.env.LANGFLOW_TOKEN}`;
 
+        // Ensure the application token is set
+        if (!this.applicationToken) {
+            throw new Error("LANGFLOW_TOKEN is not set in the environment variables.");
+        }
+    }
+
+    async post(endpoint, body, headers = { "Content-Type": "application/json" }) {
+        headers["Authorization"] = `Bearer ${this.applicationToken}`;
         const url = `${this.baseURL}${endpoint}`;
+        
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -20,14 +25,25 @@ export default class LangflowClient {
                 body: JSON.stringify(body),
             });
 
-            const responseMessage = await response.json();
+            let responseMessage;
+            try {
+                // Attempt to parse the JSON response
+                responseMessage = await response.json();
+            } catch (jsonError) {
+                const textResponse = await response.text();
+                console.error("Invalid JSON Response:", textResponse);
+                throw new Error(`Invalid JSON response: ${textResponse}`);
+            }
+
             if (!response.ok) {
+                // Handle non-200 responses with detailed error information
+                console.error("Error Response:", JSON.stringify(responseMessage, null, 2));
                 throw new Error(
-                    `${response.status} ${
-                        response.statusText
-                    } - ${JSON.stringify(responseMessage)}`
+                    `${response.status} ${response.statusText} - ${JSON.stringify(responseMessage)}`
                 );
             }
+
+            return responseMessage;
         } catch (error) {
             console.error("Request Error:", error.message);
             throw error;
@@ -55,17 +71,20 @@ export default class LangflowClient {
     handleStream(streamUrl, onUpdate, onClose, onError) {
         const eventSource = new EventSource(streamUrl);
 
+        // Handle updates from the stream
         eventSource.onmessage = (event) => {
             const data = JSON.parse(event.data);
             onUpdate(data);
         };
 
+        // Handle stream errors
         eventSource.onerror = (event) => {
             console.error("Stream Error:", event);
             onError(event);
             eventSource.close();
         };
 
+        // Handle stream closure
         eventSource.addEventListener("close", () => {
             onClose("Stream closed");
             eventSource.close();
@@ -96,7 +115,7 @@ export default class LangflowClient {
                 stream,
                 tweaks
             );
-            console.log("Init Response:", initResponse);
+
             if (
                 stream &&
                 initResponse &&
@@ -105,12 +124,12 @@ export default class LangflowClient {
             ) {
                 const streamUrl =
                     initResponse.outputs[0].outputs[0].artifacts.stream_url;
-                console.log(`Streaming from: ${streamUrl}`);
                 this.handleStream(streamUrl, onUpdate, onClose, onError);
             }
+
             return initResponse;
         } catch (error) {
-            console.error("Error running flow:", error);
+            console.error("Error running flow:", error.message);
             onError("Error initiating session");
         }
     }
@@ -123,12 +142,8 @@ async function main(
     stream = false
 ) {
     const flowIdOrName = "0cd30daa-42aa-48c7-a5d3-b316a2ec2e2d";
-    const langflowId = "538b9a06-be1f-4b38-9182-f7bac66d1520";
-    const applicationToken = process.env.LANGFLOW_TOKEN;
-    const langflowClient = new LangflowClient(
-        "https://api.langflow.astra.datastax.com",
-        applicationToken
-    );
+    const langflowId = process.env.LANGFLOW_ID;
+    const langflowClient = new LangflowClient();
 
     try {
         const tweaks = {
@@ -139,7 +154,8 @@ async function main(
             "ChatOutput-xCrgo": {},
             "Prompt-plbUp": {},
         };
-        response = await langflowClient.runFlow(
+
+        const response = await langflowClient.runFlow(
             flowIdOrName,
             langflowId,
             inputValue,
@@ -147,10 +163,12 @@ async function main(
             outputType,
             tweaks,
             stream,
-            (data) => console.log("Received:", data.chunk), // onUpdate
-            (message) => console.log("Stream Closed:", message), // onClose
-            (error) => console.log("Stream Error:", error) // onError
+            (data) => console.log("Received:", data.chunk), // Stream update callback
+            (message) => console.log("Stream Closed:", message), // Stream close callback
+            (error) => console.error("Stream Error:", error) // Stream error callback
         );
+
+        // Process and display final output for non-streaming mode
         if (!stream && response && response.outputs) {
             const flowOutputs = response.outputs[0];
             const firstComponentOutputs = flowOutputs.outputs[0];
@@ -163,12 +181,15 @@ async function main(
     }
 }
 
+// Parse command-line arguments and execute the main function
 const args = process.argv.slice(2);
 if (args.length < 1) {
     console.error(
         'Please run the file with the message as an argument: node <YOUR_FILE_NAME>.js "user_message"'
     );
+    process.exit(1);
 }
+
 main(
     args[0], // inputValue
     args[1], // inputType

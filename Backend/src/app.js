@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import healthRouter from "./routes/healthcheck.routes.js";
@@ -5,7 +7,7 @@ import langFlowRoute from "./routes/langflow.routes.js";
 import connectAstraDB from "./db/astradb.connection.js";
 
 const app = express();
-
+ 
 app.use(
     cors({
         origin: "*",
