@@ -186,7 +186,6 @@ async function langflowMain(
             const firstComponentOutputs = flowOutputs.outputs[0];
             const output = firstComponentOutputs.outputs.message;
 
-            console.log("Final Output:", output.message.text);
             return output.message.text;
         }
     } catch (error) {

@@ -18,8 +18,8 @@ app.use(
 // routes declaration
 app.use(express.json()); // parses incoming requests with JSON
 app.use("/", healthRouter); // health check route
-// app.post("/api/v1/analytics", langFlowRoute); // langflow route to post chat and get analytics from langflow
-app.use("/api/v1", langFlowRoute);
+// app.post("/api/v1/analytics", langFlowRoute);
+app.use("/api/v1", langFlowRoute); // langflow route to post chat and get analytics from langflow
 
 // connect to astra db
 connectAstraDB().catch((error) => {
@@ -27,7 +27,7 @@ connectAstraDB().catch((error) => {
 });
 
 // Middleware error handler
-app.use((error, req, res, next) => {
+app.use((error, _, res, __) => {
     console.error(error.stack); // print detailed description of error
     res.status(500).send(`Middleware Error: ${error}`);
 });
