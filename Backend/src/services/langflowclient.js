@@ -10,8 +10,7 @@ export default class LangflowClient {
         body,
         headers = { "Content-Type": "application/json" }
     ) {
-        headers["Authorization"] =
-            "Bearer AstraCS:ZocCpfZhFJsMUgJKWRZpqqdo:e062edba0c690ee462217fed4747dd426fb0ac02b39b8b4d27af1992b475ce48";
+        headers["Authorization"] = `Bearer ${process.env.LANGFLOW_TOKEN}`;
 
         const url = `${this.baseURL}${endpoint}`;
         try {
