@@ -7,7 +7,7 @@ import langFlowRoute from "./routes/langflow.routes.js";
 import connectAstraDB from "./db/astradb.connection.js";
 
 const app = express();
- 
+
 app.use(
     cors({
         origin: "*",
@@ -17,8 +17,9 @@ app.use(
 
 // routes declaration
 app.use(express.json()); // parses incoming requests with JSON
-app.use("/api/v1", healthRouter); // health check route
-app.use("/api/v1/analytics", langFlowRoute); // langflow route to post chat and get analytics from langflow
+app.use("/api", healthRouter); // health check route
+// app.post("/api/v1/analytics", langFlowRoute); // langflow route to post chat and get analytics from langflow
+app.use("/api/v1/", langFlowRoute);
 
 // connect to astra db
 connectAstraDB().catch((error) => {
