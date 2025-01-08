@@ -19,7 +19,7 @@ app.use(
 app.use(express.json()); // parses incoming requests with JSON
 app.use("/api", healthRouter); // health check route
 // app.post("/api/v1/analytics", langFlowRoute); // langflow route to post chat and get analytics from langflow
-app.use("/api/v1/", langFlowRoute);
+app.use("/api/v1", langFlowRoute);
 
 // connect to astra db
 connectAstraDB().catch((error) => {
