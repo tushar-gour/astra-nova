@@ -1,4 +1,5 @@
 // Note: Replace **<YOUR_APPLICATION_TOKEN>** with your actual Application token
+// default service file copied from langflow documentation
 
 export default class LangflowClient {
     constructor(baseURL, applicationToken) {
@@ -127,7 +128,7 @@ async function main(
     const langflowId = process.env.LANGFLOW_ID;
     const applicationToken = process.env.LANGFLOW_TOKEN;
     const langflowClient = new LangflowClient(
-        "https://api.langflow.astra.datastax.com",
+        process.env.LANGFLOW_BASE_URL,
         applicationToken
     );
 

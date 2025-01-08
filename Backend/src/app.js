@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import healthRouter from "./routes/healthcheck.routes.js";
 import langFlowRoute from "./routes/langflow.routes.js";
+import connectAstraDB from "./db/astradb.connection.js";
 
 const app = express();
 
@@ -16,5 +17,16 @@ app.use(
 app.use(express.json()); // parses incoming requests with JSON
 app.use("/api/v1", healthRouter); // health check route
 app.use("/api/v1/:analytics", langFlowRoute); // langflow route to post chat and get analytics from langflow
+
+// connect to astra db
+connectAstraDB().catch((error) => {
+    console.log("AstraDB connection failed ", error);
+});
+
+// Middleware error handler
+app.use((error, req, res, next) => {
+    console.error(error.stack); // print detailed description of error
+    res.status(500).send(`Middleware Error: ${error}`);
+});
 
 export { app };

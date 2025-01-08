@@ -2,7 +2,7 @@ import LangflowClient from "../services/langflowclient.js";
 
 const langflowClient = new LangflowClient(
     process.env.LANGFLOW_BASE_URL,
-    process.env.LANGFLOW_APPLICATION_TOKEN
+    process.env.LANGFLOW_TOKEN
 );
 
 const fetchAnalytics = async (req, res) => {
