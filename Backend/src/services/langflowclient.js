@@ -1,18 +1,18 @@
 // Note: Replace **<YOUR_APPLICATION_TOKEN>** with your actual Application token
-// default service file copied from langflow documentation
 
 export default class LangflowClient {
-    constructor(baseURL, applicationToken) {
-        this.baseURL = baseURL;
-        this.applicationToken = applicationToken;
+    constructor() {
+        this.baseURL = "https://api.langflow.astra.datastax.com";
+        this.applicationToken = process.env.LANGFLOW_TOKEN;
     }
     async post(
         endpoint,
         body,
         headers = { "Content-Type": "application/json" }
     ) {
-        headers["Authorization"] = `Bearer ${this.applicationToken}`;
-        headers["Content-Type"] = "application/json";
+        headers["Authorization"] =
+            "Bearer AstraCS:ZocCpfZhFJsMUgJKWRZpqqdo:e062edba0c690ee462217fed4747dd426fb0ac02b39b8b4d27af1992b475ce48";
+
         const url = `${this.baseURL}${endpoint}`;
         try {
             const response = await fetch(url, {
@@ -29,7 +29,6 @@ export default class LangflowClient {
                     } - ${JSON.stringify(responseMessage)}`
                 );
             }
-            return responseMessage;
         } catch (error) {
             console.error("Request Error:", error.message);
             throw error;
@@ -124,11 +123,11 @@ async function main(
     outputType = "chat",
     stream = false
 ) {
-    const flowIdOrName = process.env.FLOW_ID;
-    const langflowId = process.env.LANGFLOW_ID;
+    const flowIdOrName = "0cd30daa-42aa-48c7-a5d3-b316a2ec2e2d";
+    const langflowId = "538b9a06-be1f-4b38-9182-f7bac66d1520";
     const applicationToken = process.env.LANGFLOW_TOKEN;
     const langflowClient = new LangflowClient(
-        process.env.LANGFLOW_BASE_URL,
+        "https://api.langflow.astra.datastax.com",
         applicationToken
     );
 

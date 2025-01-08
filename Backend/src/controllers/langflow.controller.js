@@ -1,9 +1,6 @@
 import LangflowClient from "../services/langflowclient.js";
 
-const langflowClient = new LangflowClient(
-    process.env.LANGFLOW_BASE_URL,
-    process.env.LANGFLOW_TOKEN
-);
+const langflowClient = new LangflowClient();
 
 const fetchAnalytics = async (req, res) => {
     try {
@@ -24,16 +21,22 @@ const fetchAnalytics = async (req, res) => {
             });
         }
 
+        const langflowID = process.env.LANGFLOW_ID;
+        const flowID = process.env.FLOW_ID;
+
+        console.log(langflowID, flowID);
+
+        const endPoint = `/lf/${langflowID}/api/v1/run/${flowID}`;
+
+        const body = {
+            input_value: inputValue,
+            input_type: inputType,
+            output_type: outputType,
+            tweaks: {},
+        };
+
         // Make request to Langflow API
-        const response = await langflowClient.post(
-            `/lf/${process.env.LANGFLOW_ID}/api/v1/run/${process.env.FLOW_ID}`,
-            {
-                input_value: inputValue,
-                input_type: inputType,
-                output_type: outputType,
-                tweaks: {},
-            }
-        );
+        const response = await langflowClient.post(endPoint, body);
 
         // Debug log to see full response structure
         // console.log('Full Langflow Response:', JSON.stringify(response, null, 2));
