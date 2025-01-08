@@ -8,7 +8,6 @@ const fetchAnalytics = async (req, res) => {
             inputValue,
             inputType = "text",
             outputType = "chat",
-            stream = false,
         } = req.body;
 
         const langflowID = process.env.LANGFLOW_ID;
