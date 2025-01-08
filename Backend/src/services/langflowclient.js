@@ -10,14 +10,20 @@ export default class LangflowClient {
 
         // Ensure the application token is set
         if (!this.applicationToken) {
-            throw new Error("LANGFLOW_TOKEN is not set in the environment variables.");
+            throw new Error(
+                "LANGFLOW_TOKEN is not set in the environment variables."
+            );
         }
     }
 
-    async post(endpoint, body, headers = { "Content-Type": "application/json" }) {
+    async post(
+        endpoint,
+        body,
+        headers = { "Content-Type": "application/json" }
+    ) {
         headers["Authorization"] = `Bearer ${this.applicationToken}`;
         const url = `${this.baseURL}${endpoint}`;
-        
+
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -37,9 +43,14 @@ export default class LangflowClient {
 
             if (!response.ok) {
                 // Handle non-200 responses with detailed error information
-                console.error("Error Response:", JSON.stringify(responseMessage, null, 2));
+                console.error(
+                    "Error Response:",
+                    JSON.stringify(responseMessage, null, 2)
+                );
                 throw new Error(
-                    `${response.status} ${response.statusText} - ${JSON.stringify(responseMessage)}`
+                    `${response.status} ${
+                        response.statusText
+                    } - ${JSON.stringify(responseMessage)}`
                 );
             }
 
