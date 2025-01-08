@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 
 dotenv.config();
 
-export default class LangflowClient {
+class LangflowClient {
     constructor() {
         this.baseURL = "https://api.langflow.astra.datastax.com";
         this.applicationToken = process.env.LANGFLOW_TOKEN;
@@ -71,6 +71,7 @@ export default class LangflowClient {
         tweaks = {}
     ) {
         const endpoint = `/lf/${langflowId}/api/v1/run/${flowId}?stream=${stream}`;
+
         return this.post(endpoint, {
             input_value: inputValue,
             input_type: inputType,
@@ -146,13 +147,13 @@ export default class LangflowClient {
     }
 }
 
-async function main(
+async function langflowMain(
     inputValue,
     inputType = "chat",
     outputType = "chat",
     stream = false
 ) {
-    const flowIdOrName = "0cd30daa-42aa-48c7-a5d3-b316a2ec2e2d";
+    const flowIdOrName = process.env.FLOW_ID;
     const langflowId = process.env.LANGFLOW_ID;
     const langflowClient = new LangflowClient();
 
@@ -186,24 +187,11 @@ async function main(
             const output = firstComponentOutputs.outputs.message;
 
             console.log("Final Output:", output.message.text);
+            return output.message.text;
         }
     } catch (error) {
         console.error("Main Error", error.message);
     }
 }
 
-// Parse command-line arguments and execute the main function
-const args = process.argv.slice(2);
-if (args.length < 1) {
-    console.error(
-        'Please run the file with the message as an argument: node <YOUR_FILE_NAME>.js "user_message"'
-    );
-    process.exit(1);
-}
-
-main(
-    args[0], // inputValue
-    args[1], // inputType
-    args[2], // outputType
-    args[3] === "true" // stream
-);
+export default langflowMain;
