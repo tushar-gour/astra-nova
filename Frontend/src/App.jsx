@@ -70,7 +70,7 @@ const App = () => {
   const teamMembers = [
     {
       name: "Shriram Tiwari",
-      bio: "Specializing in Full stack Development and Data Analytics",
+      bio: "Specializing in Full stack Development and Data Analytics ",
       image: "assets/raam2.png",
       color: "from-violet-500 to-purple-600",
       links: {
