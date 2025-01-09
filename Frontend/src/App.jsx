@@ -1,14 +1,7 @@
 // Import necessary dependencies and icons
 import React, { useState } from "react";
 import {
-  BarChart2,
-  Zap,
-  TrendingUp,
-  Users,
   MessageSquare,
-  Share2,
-  Star,
-  ArrowRight,
   Github,
   Youtube,
   Database,
@@ -16,8 +9,9 @@ import {
   Code,
   Linkedin,
   Twitter,
-  Mail,
+  Image,
 } from "lucide-react";
+import Logo from "/assets/post_up_nobg.png";
 
 const App = () => {
   // State management for form handling and API interactions
@@ -87,7 +81,7 @@ const App = () => {
     {
       name: "Tushar Gaur",
 
-      bio: "Expert in Android Developer",
+      bio: "Expert in Android Development and Backend Development",
       image: "assets/tushar.png",
       color: "from-rose-500 to-pink-600",
       links: {
@@ -108,7 +102,7 @@ const App = () => {
     },
     {
       name: "tanishq baghel",
-      bio: "Full Stack and Data enginner",
+      bio: "Data enginner",
       image: "assets/tanishq.png",
       color: "from-teal-500 to-cyan-600",
       links: {
@@ -134,10 +128,10 @@ const App = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="p-2 bg-white/5 rounded-lg">
-                  <Star className="w-6 h-6 text-indigo-400" />
+                  <img src={Logo} alt="PostUp" width={35} height={35} />
                 </div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Post Up
+                  POST UP
                 </h1>
               </div>
               <div className="flex items-center gap-4">
@@ -190,7 +184,7 @@ const App = () => {
                   <textarea
                     value={inputValue}
                     onChange={(e) => setUserInput(e.target.value)}
-                    placeholder="Eg: which type of post is most engaging and which age group is most involved in it and what time of day users are most active in it"
+                    placeholder="Eg: which type of post is most engaging and which age group is most involved in it and what time of day users are most active in it on which device type"
                     className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-none"
                     rows="6"
                   ></textarea>
