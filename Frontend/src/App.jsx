@@ -65,8 +65,8 @@ const App = () => {
       image: "assets/raam2.png",
       color: "from-violet-500 to-purple-600",
       links: {
-        github: "https://github.com/tushar-gour",
-        linkedin: "https://linkedin.com/in/alexchen"
+        github: "https://github.com/shriramt124",
+        linkedin: "https://www.linkedin.com/in/shriramt124/"
       }
     },
     {
@@ -76,8 +76,8 @@ const App = () => {
       image: "assets/tushar.png",
       color: "from-rose-500 to-pink-600",
       links: {
-        github: "https://github.com/sarahwilson",
-        linkedin: "https://linkedin.com/in/sarahwilson"
+        github: "https://github.com/tushar-gour",
+        linkedin: "https://www.linkedin.com/in/tushar-gour-a87366270/"
       }
     },
     {
