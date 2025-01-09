@@ -81,7 +81,7 @@ const App = () => {
     {
       name: "Tushar Gour",
 
-      bio: "Expert in Android Development and Backend Development",
+      bio: "Expertise in Android Development and Backend Development",
       image: "assets/tushar.png",
       color: "from-rose-500 to-pink-600",
       links: {
@@ -92,7 +92,7 @@ const App = () => {
     {
       name: "Madhav Gupta",
 
-      bio: "Expert in Python Development",
+      bio: "Expertise in Python Development and Data Science",
       image: "assets/madhav.png",
       color: "from-amber-500 to-orange-600",
       links: {
