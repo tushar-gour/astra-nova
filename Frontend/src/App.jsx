@@ -62,10 +62,10 @@ const App = () => {
     {
       name: "Shriram Tiwari",
       bio: "Specializing in Full stack Development",
-      image: "assets/tanishq.png",
+      image: "assets/raam2.png",
       color: "from-violet-500 to-purple-600",
       links: {
-        github: "https://github.com/alexchen",
+        github: "https://github.com/tushar-gour",
         linkedin: "https://linkedin.com/in/alexchen"
       }
     },
