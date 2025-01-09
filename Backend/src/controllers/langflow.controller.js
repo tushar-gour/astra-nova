@@ -2,7 +2,7 @@ import langflowMain from "../services/langflowclient.js";
 
 const fetchAnalytics = async (req, res) => {
     try {
-        console.log(req.body,"from the frontend in fetchAnalystics")
+        console.log(req.body, "from the frontend in fetchAnalystics");
         const { inputValue } = req.body;
 
         const response = await langflowMain(inputValue);
