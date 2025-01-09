@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  base: "/",
   esbuild: {
     loader: "jsx", // or 'js'
     include: /\.jsx?$/, // Ensure JavSAcript files are correctly included
@@ -15,5 +16,8 @@ export default defineConfig({
     hmr: {
       overlay: false, // Disable the HMR error overlay in development
     },
+  },
+  build: {
+    outDir: "dist", // Vercel expects the `dist/` folder as the default output
   },
 });
