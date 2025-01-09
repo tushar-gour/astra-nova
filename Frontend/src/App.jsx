@@ -106,8 +106,9 @@ const App = () => {
       image: "assets/tanishq.png",
       color: "from-teal-500 to-cyan-600",
       links: {
-        github: "https://github.com/emmadavis",
-        linkedin: "https://linkedin.com/in/emmadavis",
+        github:
+          "https://social-analytics-kmyy03lyj-lightning-hudsons-projects.vercel.app",
+        linkedin: "https://www.linkedin.com/in/tanishq-baghel-073072345/",
       },
     },
   ];
