@@ -1,11 +1,23 @@
 // Import necessary dependencies and icons
 import React, { useState } from "react";
-import { 
-  BarChart2, Zap, TrendingUp, Users, MessageSquare, Share2, 
-  Star, ArrowRight, Github, Youtube, Database, Brain, Code,
-  Linkedin, Twitter, Mail
-} from 'lucide-react';
- 
+import {
+  BarChart2,
+  Zap,
+  TrendingUp,
+  Users,
+  MessageSquare,
+  Share2,
+  Star,
+  ArrowRight,
+  Github,
+  Youtube,
+  Database,
+  Brain,
+  Code,
+  Linkedin,
+  Twitter,
+  Mail,
+} from "lucide-react";
 
 const App = () => {
   // State management for form handling and API interactions
@@ -18,15 +30,18 @@ const App = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://social-analyics-app-team-dryrun.koyeb.app/api/v1/analytics", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({inputValue }),
-      });
+      const res = await fetch(
+        "https://social-analyics-app-team-dryrun.koyeb.app/api/v1/analytics",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ inputValue }),
+        }
+      );
       const data = await res.json();
-      console.log(data)
+      console.log(data);
       setResponse(data.message);
     } catch (error) {
       console.error("Error fetching response:", error);
@@ -41,20 +56,20 @@ const App = () => {
       icon: <Brain className="w-8 h-8" />,
       name: "Langflow",
       description: "AI-powered workflow automation",
-      color: "from-indigo-500 to-purple-600"
+      color: "from-indigo-500 to-purple-600",
     },
     {
       icon: <Database className="w-8 h-8" />,
       name: "AstraDB",
       description: "Scalable cloud database solution",
-      color: "from-rose-500 to-pink-600"
+      color: "from-rose-500 to-pink-600",
     },
     {
       icon: <Code className="w-8 h-8" />,
       name: "LangChain",
       description: "Language model integration framework",
-      color: "from-emerald-500 to-teal-600"
-    }
+      color: "from-emerald-500 to-teal-600",
+    },
   ];
 
   // Team member data with enhanced profiles and social links
@@ -66,41 +81,41 @@ const App = () => {
       color: "from-violet-500 to-purple-600",
       links: {
         github: "https://github.com/shriramt124",
-        linkedin: "https://www.linkedin.com/in/shriramt124/"
-      }
+        linkedin: "https://www.linkedin.com/in/shriramt124/",
+      },
     },
     {
       name: "Tushar Gaur",
-      
+
       bio: "Expert in Android Developer",
       image: "assets/tushar.png",
       color: "from-rose-500 to-pink-600",
       links: {
         github: "https://github.com/tushar-gour",
-        linkedin: "https://www.linkedin.com/in/tushar-gour-a87366270/"
-      }
+        linkedin: "https://www.linkedin.com/in/tushar-gour-a87366270/",
+      },
     },
     {
       name: "Madhav Gupta",
-    
+
       bio: "Expert in Python Development",
       image: "assets/madhav.png",
       color: "from-amber-500 to-orange-600",
       links: {
         github: "https://github.com/mikejohnson",
-        linkedin: "https://linkedin.com/in/mikejohnson"
-      }
+        linkedin: "https://linkedin.com/in/mikejohnson",
+      },
     },
     {
       name: "tanishq baghel",
       bio: "Full Stack and Data enginner",
-      image:"assets/tanishq.png",
+      image: "assets/tanishq.png",
       color: "from-teal-500 to-cyan-600",
       links: {
         github: "https://github.com/emmadavis",
-        linkedin: "https://linkedin.com/in/emmadavis"
-      }
-    }
+        linkedin: "https://linkedin.com/in/emmadavis",
+      },
+    },
   ];
 
   return (
@@ -126,18 +141,22 @@ const App = () => {
                 </h1>
               </div>
               <div className="flex items-center gap-4">
-                <a 
-                  href="https://github.com/your-repo" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/your-repo"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-all"
                 >
                   <Github className="w-5 h-5" />
-                  <span><a href="https://github.com/tushar-gour/social-analytics" >GitHub</a></span>
+                  <span>
+                    <a href="https://github.com/tushar-gour/social-analytics">
+                      GitHub
+                    </a>
+                  </span>
                 </a>
-                <a 
-                  href="https://youtube.com/your-demo" 
-                  target="_blank" 
+                <a
+                  href="https://youtube.com/your-demo"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 hover:opacity-90 transition-opacity"
                 >
@@ -160,14 +179,18 @@ const App = () => {
                 </span>
               </h2>
               <p className="text-slate-400 text-lg">
-                Leverage AI to optimize your social media strategy and boost engagement
+                Leverage AI to optimize your social media strategy and boost
+                engagement
               </p>
               <div className="p-0.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                <form onSubmit={handleSubmit} className="bg-slate-900 rounded-xl p-6">
+                <form
+                  onSubmit={handleSubmit}
+                  className="bg-slate-900 rounded-xl p-6"
+                >
                   <textarea
                     value={inputValue}
                     onChange={(e) => setUserInput(e.target.value)}
-                    placeholder="Ask about your posts..."
+                    placeholder="Eg: which type of post is most engaging and which age group is most involved in it and what time of day users are most active in it"
                     className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 resize-none"
                     rows="6"
                   ></textarea>
@@ -210,15 +233,23 @@ const App = () => {
           {/* Technology Stack Section */}
           <section className="space-y-12">
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4">Powered by Advanced Tech</h2>
-              <p className="text-slate-400">Built with cutting-edge technologies for optimal performance</p>
+              <h2 className="text-3xl font-bold mb-4">
+                Powered by Advanced Tech
+              </h2>
+              <p className="text-slate-400">
+                Built with cutting-edge technologies for optimal performance
+              </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {techStack.map((tech, index) => (
                 <div key={index} className="group relative">
-                  <div className={`absolute inset-0 bg-gradient-to-r ${tech.color} opacity-0 group-hover:opacity-20 transition-opacity blur-xl`} />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${tech.color} opacity-0 group-hover:opacity-20 transition-opacity blur-xl`}
+                  />
                   <div className="relative p-6 bg-white/5 border border-white/10 rounded-2xl hover:border-white/20 transition-all backdrop-blur-sm">
-                    <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${tech.color} mb-4`}>
+                    <div
+                      className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${tech.color} mb-4`}
+                    >
                       {tech.icon}
                     </div>
                     <h3 className="text-xl font-semibold mb-2">{tech.name}</h3>
@@ -232,9 +263,12 @@ const App = () => {
           {/* Enhanced Team Section */}
           <section className="py-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Meet Our Team</h2>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Meet Our Team
+              </h2>
               <p className="text-slate-400 max-w-2xl mx-auto">
-                Passionate experts committed to revolutionizing social media content creation.
+                Passionate experts committed to revolutionizing social media
+                content creation.
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
@@ -247,7 +281,9 @@ const App = () => {
                       alt={member.name}
                       className="w-20 h-20 rounded-full mb-4 ring-2 ring-purple-500/50"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-1">{member.name}</h3>
+                    <h3 className="text-xl font-semibold text-white mb-1">
+                      {member.name}
+                    </h3>
                     <p className="text-pink-400 mb-3">{member.role}</p>
                     <p className="text-slate-400 mb-4">{member.bio}</p>
                     <div className="flex gap-4">
@@ -259,9 +295,15 @@ const App = () => {
                           rel="noopener noreferrer"
                           className="text-slate-400 hover:text-pink-400 transition-colors"
                         >
-                          {platform === 'github' && <Github className="w-5 h-5" />}
-                          {platform === 'linkedin' && <Linkedin className="w-5 h-5" />}
-                          {platform === 'twitter' && <Twitter className="w-5 h-5" />}
+                          {platform === "github" && (
+                            <Github className="w-5 h-5" />
+                          )}
+                          {platform === "linkedin" && (
+                            <Linkedin className="w-5 h-5" />
+                          )}
+                          {platform === "twitter" && (
+                            <Twitter className="w-5 h-5" />
+                          )}
                         </a>
                       ))}
                     </div>
@@ -274,11 +316,12 @@ const App = () => {
           <section className="text-center space-y-8">
             <h2 className="text-3xl font-bold">See It In Action</h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Watch our demo to see how Post up can transform your social media strategy
+              Watch our demo to see how Post up can transform your social media
+              strategy
             </p>
-            <a 
-              href="https://youtube.com/your-demo" 
-              target="_blank" 
+            <a
+              href="https://youtube.com/your-demo"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 hover:opacity-90 transition-opacity text-lg font-semibold"
             >
@@ -292,7 +335,8 @@ const App = () => {
         <footer className="border-t border-white/10 mt-24">
           <div className="max-w-7xl mx-auto px-4 py-8">
             <p className="text-center text-slate-400">
-              © {new Date().getFullYear()} Post up. Built with passion by our amazing team.
+              © {new Date().getFullYear()} Post up. Built with passion by our
+              amazing team.
             </p>
           </div>
         </footer>
