@@ -81,7 +81,7 @@ const App = () => {
     {
       name: "Tushar Gour",
 
-      bio: "Expertise in Android Development and Backend Development",
+      bio: "Expertise in Full stack Android Development and Backend Development",
       image: "assets/tushar.png",
       color: "from-rose-500 to-pink-600",
       links: {
