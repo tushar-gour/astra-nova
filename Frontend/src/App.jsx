@@ -5,6 +5,7 @@ import {
   Star, ArrowRight, Github, Youtube, Database, Brain, Code,
   Linkedin, Twitter, Mail
 } from 'lucide-react';
+ 
 
 const App = () => {
   // State management for form handling and API interactions
@@ -61,7 +62,7 @@ const App = () => {
     {
       name: "Shriram Tiwari",
       bio: "Specializing in Full stack Development",
-      image: "/api/placeholder/150/150",
+      image: "assets/tanishq.png",
       color: "from-violet-500 to-purple-600",
       links: {
         github: "https://github.com/alexchen",
@@ -72,7 +73,7 @@ const App = () => {
       name: "Tushar Gaur",
       
       bio: "Expert in Android Developer",
-      image: "/api/placeholder/150/150",
+      image: "assets/tushar.png",
       color: "from-rose-500 to-pink-600",
       links: {
         github: "https://github.com/sarahwilson",
@@ -83,7 +84,7 @@ const App = () => {
       name: "Madhav Gupta",
     
       bio: "Expert in Python Development",
-      image: "/api/placeholder/150/150",
+      image: "assets/madhav.png",
       color: "from-amber-500 to-orange-600",
       links: {
         github: "https://github.com/mikejohnson",
@@ -93,7 +94,7 @@ const App = () => {
     {
       name: "tanishq baghel",
       bio: "Full Stack and Data enginner",
-      image: "/api/placeholder/150/150",
+      image:"assets/tanishq.png",
       color: "from-teal-500 to-cyan-600",
       links: {
         github: "https://github.com/emmadavis",
