@@ -137,7 +137,7 @@ const App = () => {
               </div>
               <div className="flex items-center gap-4">
                 <a
-                  href="https://github.com/your-repo"
+                  href="https://github.com/tushar-gour/social-analytics"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-all"
@@ -150,7 +150,7 @@ const App = () => {
                   </span>
                 </a>
                 <a
-                  href="https://youtube.com/your-demo"
+                  href="https://www.youtube.com/watch?v=FX_7xDHD3K4"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 hover:opacity-90 transition-opacity"
