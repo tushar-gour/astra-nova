@@ -70,7 +70,7 @@ const App = () => {
   const teamMembers = [
     {
       name: "Shriram Tiwari",
-      bio: "Specializing in Full stack Development",
+      bio: "Specializing in Full stack Development and Data Analytics",
       image: "assets/raam2.png",
       color: "from-violet-500 to-purple-600",
       links: {
@@ -79,7 +79,7 @@ const App = () => {
       },
     },
     {
-      name: "Tushar Gaur",
+      name: "Tushar Gour",
 
       bio: "Expert in Android Development and Backend Development",
       image: "assets/tushar.png",
@@ -101,8 +101,8 @@ const App = () => {
       },
     },
     {
-      name: "tanishq baghel",
-      bio: "Data enginner",
+      name: "Tanishq Baghel",
+      bio: "Web Development",
       image: "assets/tanishq.png",
       color: "from-teal-500 to-cyan-600",
       links: {
