@@ -1,0 +1,7 @@
+Welcome to POST UP
+
+At POST UP, we harness the power of Generative AI (GenAI) alongside advanced tools like LangFlow, AstraDB, and the GROQ API to deliver detailed insights into your social media performance. Our platform focuses on providing precise analytics, empowering you to make informed decisions about your online presence.
+
+With our innovative architecture, POST UP analyzes input data in real time. From identifying the most engaging types of posts and the demographics most involved, to determining the optimal times for audience activity, we present clear, actionable insights to help you understand your social media impact. Hosted on Koyeb.com, our reliable infrastructure ensures a smooth, and efficient experience.
+
+Whether you're a brand, a content creator, or simply someone seeking to decode the numbers behind your social media activity, POST UP is here to equip you with the information you need.

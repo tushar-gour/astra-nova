@@ -1,0 +1,1 @@
+The Flow Model is at the heart of POST UP's seamless processing. This model organizes and structures data inputs, ensuring that each query flows effortlessly through our system. By managing the logical sequence of tasks, the Flow Model guarantees that every piece of information is processed accurately and efficiently, resulting in precise analytics
