@@ -17,7 +17,7 @@ const App = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://social-analytics-team-dryrun.koyeb.com/api/v1/analytics", {
+      const res = await fetch("https://social-analyics-app-team-dryrun.koyeb.app/api/v1/analytics", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,7 +25,8 @@ const App = () => {
         body: JSON.stringify({inputValue }),
       });
       const data = await res.json();
-      setResponse(data.analysis);
+      console.log(data)
+      setResponse(data.message);
     } catch (error) {
       console.error("Error fetching response:", error);
       setResponse("Failed to fetch analysis.");
@@ -58,51 +59,45 @@ const App = () => {
   // Team member data with enhanced profiles and social links
   const teamMembers = [
     {
-      name: "Alex Chen",
-      role: "AI Engineer",
-      bio: "Specializing in machine learning and natural language processing",
+      name: "Shriram Tiwari",
+      bio: "Specializing in Full stack Development",
       image: "/api/placeholder/150/150",
       color: "from-violet-500 to-purple-600",
       links: {
         github: "https://github.com/alexchen",
-        linkedin: "https://linkedin.com/in/alexchen",
-        twitter: "https://twitter.com/alexchen"
+        linkedin: "https://linkedin.com/in/alexchen"
       }
     },
     {
-      name: "Sarah Wilson",
-      role: "Full Stack Developer",
-      bio: "Expert in React and Node.js ecosystems",
+      name: "Tushar Gaur",
+      
+      bio: "Expert in Android Developer",
       image: "/api/placeholder/150/150",
       color: "from-rose-500 to-pink-600",
       links: {
         github: "https://github.com/sarahwilson",
-        linkedin: "https://linkedin.com/in/sarahwilson",
-        twitter: "https://twitter.com/sarahwilson"
+        linkedin: "https://linkedin.com/in/sarahwilson"
       }
     },
     {
-      name: "Mike Johnson",
-      role: "UI/UX Designer",
-      bio: "Creating beautiful and intuitive user experiences",
+      name: "Madhav Gupta",
+    
+      bio: "Expert in Python Development",
       image: "/api/placeholder/150/150",
       color: "from-amber-500 to-orange-600",
       links: {
         github: "https://github.com/mikejohnson",
-        linkedin: "https://linkedin.com/in/mikejohnson",
-        twitter: "https://twitter.com/mikejohnson"
+        linkedin: "https://linkedin.com/in/mikejohnson"
       }
     },
     {
-      name: "Emma Davis",
-      role: "Project Manager",
-      bio: "Driving innovation and team collaboration",
+      name: "tanishq baghel",
+      bio: "Full Stack and Data enginner",
       image: "/api/placeholder/150/150",
       color: "from-teal-500 to-cyan-600",
       links: {
         github: "https://github.com/emmadavis",
-        linkedin: "https://linkedin.com/in/emmadavis",
-        twitter: "https://twitter.com/emmadavis"
+        linkedin: "https://linkedin.com/in/emmadavis"
       }
     }
   ];
@@ -278,7 +273,7 @@ const App = () => {
           <section className="text-center space-y-8">
             <h2 className="text-3xl font-bold">See It In Action</h2>
             <p className="text-slate-400 max-w-2xl mx-auto">
-              Watch our demo to see how SmartPost AI can transform your social media strategy
+              Watch our demo to see how Post up can transform your social media strategy
             </p>
             <a 
               href="https://youtube.com/your-demo" 
@@ -296,7 +291,7 @@ const App = () => {
         <footer className="border-t border-white/10 mt-24">
           <div className="max-w-7xl mx-auto px-4 py-8">
             <p className="text-center text-slate-400">
-              © {new Date().getFullYear()} SmartPost AI. Built with passion by our amazing team.
+              © {new Date().getFullYear()} Post up. Built with passion by our amazing team.
             </p>
           </div>
         </footer>
