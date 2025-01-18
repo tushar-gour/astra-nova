@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 
-// List of planets used for Kundali
+// Sidereal Zodiac Degrees
 const PLANETS = [
   "Sun",
   "Moon",
@@ -62,7 +62,7 @@ const getLagnaKundali = asyncHandler(async (dob, birthTime, latitude, longitude)
   const julianDay = calculateJulianDay(parseInt(year), parseInt(month), parseInt(day));
 
   // Step 3: Calculate Sidereal Time
-  const calculateLST = (julianDay, longitude) => {
+  const calculateLST = (julianDay, longitude, decimalHours) => {
     const T = (julianDay - 2451545.0) / 36525; // Julian centuries since J2000.0
     const GMST =
       280.46061837 +
@@ -70,19 +70,20 @@ const getLagnaKundali = asyncHandler(async (dob, birthTime, latitude, longitude)
       T ** 2 * 0.000387933 -
       (T ** 3) / 38710000;
 
-    // Convert GMST to 0-360° range and adjust for longitude
+    // Convert GMST to 0-360° range and adjust for decimalHours and longitude
     const GMSTNormalized = ((GMST % 360) + 360) % 360;
-    const LST = GMSTNormalized + longitude;
+    const LST = GMSTNormalized + longitude + (decimalHours * 15); // Decimal hours adjusted (15° per hour)
 
     // Normalize to 0-360°
     return ((LST % 360) + 360) % 360;
   };
 
-  const localSiderealTime = calculateLST(julianDay, longitude);
+  const localSiderealTime = calculateLST(julianDay, longitude, decimalHours);
 
   // Step 4: Calculate Ascendant Degree
   const calculateAscendant = (localSiderealTime, latitude) => {
-    const ascendantDegree = localSiderealTime; // LST directly corresponds to the ascendant
+    // Adjust LST based on latitude (simplified adjustment for demonstration)
+    const ascendantDegree = localSiderealTime + (latitude / 90) * 15; // Influence of latitude on ascendant
     return ((ascendantDegree % 360) + 360) % 360; // Normalize to 0-360°
   };
 

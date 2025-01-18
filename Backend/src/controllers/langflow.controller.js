@@ -17,7 +17,18 @@ const fetchAnalytics = async (req, res) => {
         const lagnaKundali = await getLagnaKundali(dob, birthTime, latlong["latitude"], latlong["longitude"]);
 
         // Send the lagnaKundali response
-        return res.status(200).json({ rashi, lagnaKundali });
+
+        return res.status(200).json({
+            "rashi": rashi,
+            "planets": [],
+            "horoscope": {
+                "daily": "",
+                "monthly": ""
+            },
+            "lagna_kundli": lagnaKundali,
+            "navasma_kundli": [],
+            "houses": []
+        });
         
     } catch (error) {
         console.error("Error in fetchAnalytics:", error.stack);
