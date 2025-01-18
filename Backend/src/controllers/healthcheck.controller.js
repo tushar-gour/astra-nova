@@ -1,4 +1,4 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
+import asyncHandler from "express-async-handler";
 
 // health check for server status
 const healthcheck = asyncHandler(async (_, res) => {
