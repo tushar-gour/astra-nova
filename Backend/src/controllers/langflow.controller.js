@@ -1,6 +1,8 @@
 import getRashi from "../utils/rashi.js";
 import getLagnaKundali from "../utils/kundali.js";
 import getLatLong from "../utils/latlong.js";
+import getNavasmaKundali from "../utils/navasma.js";
+import getHoroscope from "../utils/horoscope.js";
 
 const fetchAnalytics = async (req, res) => {
     try {
@@ -15,19 +17,19 @@ const fetchAnalytics = async (req, res) => {
         }
 
         const lagnaKundali = await getLagnaKundali(dob, birthTime, latlong["latitude"], latlong["longitude"]);
+        const navamsaKundali = await getNavasmaKundali(dob, birthTime, latlong["latitude"], latlong["longitude"]);
 
-        // Send the lagnaKundali response
+        // {
+        //     "daily": "",
+        //     "monthly": ""
+        // },
+        const horoscope = await getHoroscope();
 
         return res.status(200).json({
             "rashi": rashi,
-            "planets": [],
-            "horoscope": {
-                "daily": "",
-                "monthly": ""
-            },
+            "horoscope": horoscope,
             "lagna_kundli": lagnaKundali,
-            "navasma_kundli": [],
-            "houses": []
+            "navasma_kundli": navamsaKundali
         });
         
     } catch (error) {

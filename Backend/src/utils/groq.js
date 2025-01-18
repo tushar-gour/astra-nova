@@ -20,7 +20,7 @@ async function groqMain(city) {
 
     const responseContent = chatCompletion.choices[0]?.message?.content;
     const locationData = JSON.parse(responseContent);
-
+    
     return locationData;
   } catch (error) {
     console.error("Error occurred:", error);
