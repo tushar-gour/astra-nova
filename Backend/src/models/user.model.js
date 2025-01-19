@@ -2,8 +2,8 @@ import { Client } from 'cassandra-driver';
 import bcrypt from 'bcrypt';
 
 const client = new Client({
-    contactPoints: ['your_contact_point'], // Replace with your DataStax contact point
-    localDataCenter: 'datacenter1', // Replace with your DataStax data center
+    contactPoints: ["0.0.0.0/0"], // Replace with your DataStax contact point
+    localDataCenter: process.env.ASTRADB_DATA_CENTER, // Replace with your DataStax data center
 });
 
 const createUser = async (username, email, password) => {
