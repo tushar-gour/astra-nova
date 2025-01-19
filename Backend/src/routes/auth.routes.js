@@ -12,12 +12,6 @@ const limiter = rateLimit({
     message: "Too many requests, please try again later.",
 });
 
-// Password strength validation function
-const isPasswordStrong = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(password);
-};
-
 // Signup Route
 router.post("/signup", limiter, async (req, res) => {
     const { username, email, password } = req.body;
@@ -25,11 +19,6 @@ router.post("/signup", limiter, async (req, res) => {
     // Validate input
     if (!username || !email || !password) {
         return res.status(400).json({ message: "All fields are required." });
-    }
-
-    // Validate password strength
-    if (!isPasswordStrong(password)) {
-        return res.status(400).json({ message: "Password must be at least 8 characters long, contain uppercase and lowercase letters, numbers, and special characters." });
     }
 
     try {
