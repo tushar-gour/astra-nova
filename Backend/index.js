@@ -11,7 +11,12 @@ app.use(cors({
     credentials: true
 }));
 
-app.options("*", cors());
+app.use((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allow specific methods
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
+    next();
+});
 
 // Other middleware and routes come after
 app.use(express.json());
