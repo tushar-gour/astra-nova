@@ -11,6 +11,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.options("*", cors());
+
 // Other middleware and routes come after
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
