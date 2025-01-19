@@ -19,10 +19,6 @@ const fetchAnalytics = async (req, res) => {
         const lagnaKundali = await getLagnaKundali(dob, birthTime, latlong["latitude"], latlong["longitude"]);
         const navamsaKundali = await getNavasmaKundali(dob, birthTime, latlong["latitude"], latlong["longitude"]);
 
-        // {
-        //     "daily": "",
-        //     "monthly": ""
-        // },
         const horoscope = await getHoroscope();
 
         return res.status(200).json({

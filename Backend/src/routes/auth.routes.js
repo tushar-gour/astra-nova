@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser } from "../models/user.model.js"; // Import the DataStax user model
+import { createUser, checkUserExists } from "../models/user.model.js"; // Import the DataStax user model
 import jwt from "jsonwebtoken"; // Importing JWT for token generation
 import rateLimit from "express-rate-limit"; // Importing rate limiting middleware
 
@@ -33,13 +33,12 @@ router.post("/signup", limiter, async (req, res) => {
     }
 
     try {
-        // Check if user already exists (this logic needs to be implemented in DataStax)
-        const existingUser = await checkUserExists(email); // Implement this function
+        const existingUser = await checkUserExists(email);
         if (existingUser) {
             return res.status(400).json({ message: "User already exists." });
         }
 
-        await createUser(username, email, password); // Use DataStax to create the user
+        await createUser(username, email, password);
         return res.status(201).json({ message: "User created successfully." });
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -56,12 +55,11 @@ router.post("/login", limiter, async (req, res) => {
     }
 
     try {
-        const user = await checkUserExists(email); // Implement this function
+        const user = await checkUserExists(email);
         if (!user || !(await comparePassword(password, user.password))) {
             return res.status(401).json({ message: "Invalid credentials." });
         }
 
-        // Generate a JWT token
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
         return res.status(200).json({ message: "Login successful.", token });

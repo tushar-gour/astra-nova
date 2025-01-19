@@ -3,7 +3,6 @@ import authRoutes from "./routes/auth.routes.js"; // Importing authentication ro
 import connectAstraDB from "./db/astradb.connection.js";
 
 const app = express();
-const PORT = 8000;
 
 // Middleware
 app.use(express.json()); // To parse JSON bodies
@@ -15,8 +14,4 @@ connectAstraDB().then(() => console.log("AstraDB connected"))
 // Use authentication routes
 app.use("/api/auth", authRoutes);
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server running at port: ${PORT}`);
-});
 export default app;
