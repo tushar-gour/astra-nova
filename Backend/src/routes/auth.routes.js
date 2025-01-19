@@ -1,19 +1,13 @@
 import express from "express";
 import { createUser, checkUserExists , comparePassword} from "../models/user.model.js"; // Import the DataStax user model
 import jwt from "jsonwebtoken"; // Importing JWT for token generation
-import rateLimit from "express-rate-limit"; // Importing rate limiting middleware
-
+ 
 const router = express.Router();
 
-// Rate limiting middleware for signup and login
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // Limit each IP to 100 requests per windowMs
-    message: "Too many requests, please try again later.",
-});
+ 
 
 // Signup Route
-router.post("/signup", limiter, async (req, res) => {
+router.post("/signup", async (req, res) => {
     const { username, email, password } = req.body;
 
     // Validate input
@@ -35,7 +29,7 @@ router.post("/signup", limiter, async (req, res) => {
 });
 
 // Login Route
-router.post("/login", limiter, async (req, res) => {
+router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     // Validate input
