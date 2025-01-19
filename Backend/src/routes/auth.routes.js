@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, checkUserExists } from "../models/user.model.js"; // Import the DataStax user model
+import { createUser, checkUserExists , comparePassword} from "../models/user.model.js"; // Import the DataStax user model
 import jwt from "jsonwebtoken"; // Importing JWT for token generation
 import rateLimit from "express-rate-limit"; // Importing rate limiting middleware
 
