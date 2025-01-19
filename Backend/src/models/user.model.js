@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
-
+export default User;
 const createUser = async (username, email, password) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,7 +16,10 @@ const createUser = async (username, email, password) => {
         await user.save(); // Save user to MongoDB
     } catch (error) {
         console.error("Error creating user:", error);
-        throw new Error("User creation failed");
+        if (error.code === 11000) { // Duplicate key error
+            throw new Error("Email already exists.");
+        }
+        throw new Error("User creation failed due to an internal error.");
     }
 };
 
@@ -26,7 +29,7 @@ const checkUserExists = async (email) => {
         return user;
     } catch (error) {
         console.error("Error checking user existence:", error);
-        throw new Error("User existence check failed");
+        throw new Error("User existence check failed due to an internal error.");
     }
 };
 

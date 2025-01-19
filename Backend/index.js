@@ -1,22 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import cors from "cors";
+import express from "express"; // Import express
 import app from "./src/app.js";
 
 const PORT = process.env.PORT || 8000;
 
-app.use(cors({
-    origin: "*", // Client origin
-    credentials: true
-}));
-
-app.use((_, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allow specific methods
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
-    next();
-});
 
 // Other middleware and routes come after
 app.use(express.json());

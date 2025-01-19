@@ -5,9 +5,14 @@ import getNavasmaKundali from "../utils/navasma.js";
 import getHoroscope from "../utils/horoscope.js";
 
 const fetchAnalytics = async (req, res) => {
-    try {
-        const { dob, birthTime, birthCity = "Tokyo" } = req.body;
+    const { dob, birthTime, birthCity = "Tokyo" } = req.body;
 
+    // Validate input
+    if (!dob || !birthTime) {
+        return res.status(400).json({ message: "Date of birth and birth time are required." });
+    }
+
+    try {
         const rashi = await getRashi(dob, birthTime);
         const latlong = await getLatLong(birthCity);
 
@@ -30,7 +35,7 @@ const fetchAnalytics = async (req, res) => {
         
     } catch (error) {
         console.error("Error in fetchAnalytics:", error.stack);
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: "Internal server error while fetching analytics." });
     }
 };
 
