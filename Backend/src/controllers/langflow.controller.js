@@ -6,7 +6,7 @@ import getHoroscope from "../utils/horoscope.js";
 
 const fetchAnalytics = async (req, res) => {
     try {
-        const { dob, birthTime, birthCity = "Indore" } = req.body;
+        const { dob, birthTime, birthCity = "Tokyo" } = req.body;
 
         const rashi = await getRashi(dob, birthTime);
         const latlong = await getLatLong(birthCity);
