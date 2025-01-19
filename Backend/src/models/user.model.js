@@ -6,6 +6,7 @@ const client = new Client({
     localDataCenter: process.env.ASTRADB_DATA_CENTER, // Replace with your DataStax data center
 });
 
+
 const createUser = async (username, email, password) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
