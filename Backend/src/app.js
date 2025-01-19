@@ -1,35 +1,22 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
-import cors from "cors";
-import healthRouter from "./routes/healthcheck.routes.js";
-import langFlowRoute from "./routes/langflow.routes.js";
+import authRoutes from "./routes/auth.routes.js"; // Importing authentication routes
 import connectAstraDB from "./db/astradb.connection.js";
 
 const app = express();
+const PORT = 8000;
 
-app.use(
-    cors({
-        origin: "*",
-        credentials: true,
-    })
-);
+// Middleware
+app.use(express.json()); // To parse JSON bodies
 
-// routes declaration
-app.use(express.json()); // parses incoming requests with JSON
-app.use("/api", healthRouter); // health check route
-// app.post("/api/v1/analytics", langFlowRoute);
-app.use("/api/v1", langFlowRoute); // langflow route to post chat and get analytics from langflow
+// Connect to MongoDB (update with your connection string)
+connectAstraDB().then(() => console.log("AstraDB connected"))
+.catch(err => console.error("AstraDB connection error:", err));
 
-// connect to astra db
-connectAstraDB().catch((error) => {
-    console.log("AstraDB connection failed ", error);
+// Use authentication routes
+app.use("/api/auth", authRoutes);
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server running at port: ${PORT}`);
 });
-
-// Middleware error handler
-app.use((error, _, res, __) => {
-    console.error(error.stack); // print detailed description of error
-    res.status(500).send(`Middleware Error: ${error}`);
-});
-
-export { app };
+export default app;
