@@ -1,17 +1,19 @@
-import { Client } from 'cassandra-driver';
-import bcrypt from 'bcrypt';
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
-const client = new Client({
-    contactPoints: ["0.0.0.0/0"], // Replace with your DataStax contact point
-    localDataCenter: process.env.ASTRADB_DATA_CENTER, // Replace with your DataStax data center
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
 });
 
+const User = mongoose.model("User", userSchema);
 
 const createUser = async (username, email, password) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-        await client.execute(query, [username, email, hashedPassword], { prepare: true });
+        const user = new User({ username, email, password: hashedPassword });
+        await user.save(); // Save user to MongoDB
     } catch (error) {
         console.error("Error creating user:", error);
         throw new Error("User creation failed");
@@ -20,9 +22,8 @@ const createUser = async (username, email, password) => {
 
 const checkUserExists = async (email) => {
     try {
-        const query = 'SELECT * FROM users WHERE email = ?';
-        const result = await client.execute(query, [email], { prepare: true });
-        return result.rowLength > 0 ? result.rows[0] : null;
+        const user = await User.findOne({ email }); // Check if user exists
+        return user;
     } catch (error) {
         console.error("Error checking user existence:", error);
         throw new Error("User existence check failed");
